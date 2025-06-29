@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 210 15% 15%;
+    --card: 210 20% 100%;
+    --card-foreground: 210 15% 15%;
+    --popover: 210 20% 100%;
+    --popover-foreground: 210 15% 15%;
+    --primary: 195 65% 45%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 210 15% 94%;
+    --secondary-foreground: 210 15% 25%;
+    --muted: 210 15% 94%;
+    --muted-foreground: 210 10% 50%;
+    --accent: 260 70% 68%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 210 15% 88%;
+    --input: 210 15% 88%;
+    --ring: 195 65% 45%;
+    --chart-1: 195 80% 55%;
+    --chart-2: 175 65% 50%;
+    --chart-3: 220 70% 60%;
+    --chart-4: 260 70% 68%;
+    --chart-5: 280 65% 70%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 210 30% 8%;
+    --foreground: 210 20% 95%;
+    --card: 210 25% 10%;
+    --card-foreground: 210 20% 95%;
+    --popover: 210 25% 10%;
+    --popover-foreground: 210 20% 95%;
+    --primary: 195 65% 55%;
+    --primary-foreground: 210 30% 8%;
+    --secondary: 210 20% 16%;
+    --secondary-foreground: 210 20% 95%;
+    --muted: 210 20% 16%;
+    --muted-foreground: 210 15% 65%;
+    --accent: 260 70% 75%;
+    --accent-foreground: 210 30% 8%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 210 20% 95%;
+    --border: 210 20% 16%;
+    --input: 210 20% 16%;
+    --ring: 195 65% 55%;
+    --chart-1: 195 80% 65%;
+    --chart-2: 175 70% 60%;
+    --chart-3: 220 75% 70%;
+    --chart-4: 260 70% 75%;
+    --chart-5: 280 70% 80%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  .mindful-gradient {
+    @apply bg-gradient-to-br from-primary via-accent to-primary/90;
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease-in-out infinite;
+  }
+
+  .header-gradient {
+    @apply bg-gradient-to-r from-primary via-primary/95 to-accent/80;
+    background-size: 200% 200%;
+    animation: gradient-shift 12s ease-in-out infinite;
+  }
+
+  .card-glow {
+    position: relative;
+  }
+
+  .card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.1), 
+      hsl(var(--accent) / 0.05), 
+      hsl(var(--primary) / 0.1)
+    );
+    border-radius: inherit;
+    z-index: -1;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card-glow:hover::before {
+    opacity: 1;
+  }
+
+  .scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary) / 0.3) transparent;
+  }
+
+  .scroll-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scroll-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 2px;
+  }
+
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.6);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .glass-effect {
+    backdrop-filter: blur(12px);
+    background: hsla(var(--background), 0.85);
+    border: 1px solid hsla(var(--primary), 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
